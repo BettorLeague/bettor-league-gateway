@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  bettor-league-gateway:
+    container_name: bettor-league-gateway
+    image: traefik:1.5.4
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - bettor-league-network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/traefik.toml
+      - ./acme.json:/acme.json
+
+networks:
+  bettor-league-network:
+    external: true

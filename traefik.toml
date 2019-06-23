@@ -1,0 +1,34 @@
+debug = false
+
+logLevel = "ERROR"
+defaultEntryPoints = ["https","http"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
+
+[retry]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "bettorleague.ovh"
+watch = true
+exposedByDefault = false
+
+[acme]
+email = "c.nadjim@gmail.com"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
+
+[web]
+adresse = ":8080"
+[web.auth.basic]
+users = ["admin: $apr1$ihkgQ5B.$88/vJa6iTDVlYtZ76EcRY1"]
